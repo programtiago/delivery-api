@@ -2,6 +2,13 @@ plugins {
 	id 'org.springframework.boot' version '2.6.7'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id "org.flywaydb.flyway" version "7.12.0"
+}
+
+flyway{
+	url = 'jdbc:mysql://localhost:3306/db'
+	user = 'root'
+	password =
 }
 
 group = 'com.tiago-developer'
@@ -14,6 +21,9 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.6.1'
+	runtimeOnly 'mysql:mysql-connector-java'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	compileOnly 'org.projectlombok:lombok:1.18.24'
