@@ -1,7 +1,15 @@
 package com.tiagodeveloper.domain;
 
+import lombok.EqualsAndHashCode;
+
+import javax.persistence.*;
+
+@Entity
 public class Client {
 
+    @EqualsAndHashCode.Include
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
@@ -38,4 +46,6 @@ public class Client {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
 }
