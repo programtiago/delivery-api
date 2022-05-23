@@ -3,6 +3,9 @@ package com.tiagodeveloper.domain;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Client {
@@ -11,8 +14,18 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
+    @Size(max = 60)
     private String name;
+
+    @NotBlank
+    @Email
+    @Size(max=255)
     private String email;
+
+    @NotBlank
+    @Size(max = 9)
     private String phone;
 
     public Long getId() {
