@@ -6,9 +6,9 @@ plugins {
 }
 
 flyway{
-	url = 'jdbc:mysql://localhost:3306/db'
+	url = 'jdbc:mysql://localhost:3306/delivery-system'
 	user = 'root'
-	password = ''
+	password = 'Oportoeumanacao1893@'
 }
 
 group = 'com.tiago-developer'
