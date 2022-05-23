@@ -48,7 +48,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/{clientId}")
-    public ResponseEntity<Void> delete(Long clientId){
+    public ResponseEntity<Void> delete(@PathVariable Long clientId){
         if (!clientRepository.existsById(clientId)){
             return ResponseEntity.notFound().build();
         }
