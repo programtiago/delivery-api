@@ -1,24 +1,23 @@
 package com.tiagodeveloper.domain;
 
-import lombok.EqualsAndHashCode;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@Entity
+@Embeddable
 public class Recipient {
 
-    @EqualsAndHashCode.Include
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "recipient_name")
     private String name;
+
+    @Column(name = "address_name")
     private String address;
+
+    @Column(name = "recipient_number")
     private String number;
+
+    @Column(name = "recipient_complement")
     private String complement;
+
+    @Column(name = "recipient_district")
     private String district;
 
     public String getName() {
