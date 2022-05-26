@@ -8,7 +8,7 @@ plugins {
 flyway{
 	url = 'jdbc:mysql://localhost:3306/db'
 	user = 'root'
-	password = 'Oportoeumanacao1893@'
+	password = ''
 }
 
 group = 'com.tiago-developer'
