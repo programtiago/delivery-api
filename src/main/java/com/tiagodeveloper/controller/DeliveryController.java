@@ -2,6 +2,8 @@ package com.tiagodeveloper.controller;
 
 import com.tiagodeveloper.domain.Delivery;
 import com.tiagodeveloper.domain.service.DeliverySolicitationService;
+import com.tiagodeveloper.model.DeliveryModel;
+import com.tiagodeveloper.model.RecipientModel;
 import com.tiagodeveloper.repository.DeliveryRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,9 +31,25 @@ public class DeliveryController {
     }
 
     @GetMapping("/{deliveryId}")
-    public ResponseEntity<Delivery> get(@PathVariable Long deliveryId){
+    public ResponseEntity<DeliveryModel> get(@PathVariable Long deliveryId){
         return deliveryRepository.findById(deliveryId)
-                .map(ResponseEntity::ok)
+                .map(delivery -> {
+                    DeliveryModel deliveryModel = new DeliveryModel();
+                    deliveryModel.setId(delivery.getId());
+                    deliveryModel.setClientName(delivery.getClient().getName());
+                    deliveryModel.setRecipient(new RecipientModel());
+                    deliveryModel.getRecipient().setName(delivery.getRecipient().getName());
+                    deliveryModel.getRecipient().setAddress(delivery.getRecipient().getAddress());
+                    deliveryModel.getRecipient().setComplement(delivery.getRecipient().getComplement());
+                    deliveryModel.getRecipient().setNumber(delivery.getRecipient().getNumber());
+                    deliveryModel.getRecipient().setDistrict(delivery.getRecipient().getDistrict());
+                    deliveryModel.setTax(delivery.getTax());
+                    deliveryModel.setStatus(delivery.getStatus());
+                    deliveryModel.setRequestDate(delivery.getRequestDate());
+                    deliveryModel.setCompletionDate(delivery.getCompletionDate());
+
+                    return ResponseEntity.ok(deliveryModel);
+                })
                 .orElse(ResponseEntity.notFound().build());
     }
 
