@@ -8,7 +8,7 @@ import java.time.OffsetDateTime;
 public class DeliveryModel {
 
     private Long id;
-    private String clientName;
+    private ClientResumModel client;
     private RecipientModel recipient;
     private BigDecimal tax;
     private StatusDelivery status;
@@ -21,14 +21,6 @@ public class DeliveryModel {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getClientName() {
-        return clientName;
-    }
-
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
     }
 
     public RecipientModel getRecipient() {
@@ -49,6 +41,14 @@ public class DeliveryModel {
 
     public StatusDelivery getStatus() {
         return status;
+    }
+
+    public ClientResumModel getClient() {
+        return client;
+    }
+
+    public void setClient(ClientResumModel client) {
+        this.client = client;
     }
 
     public void setStatus(StatusDelivery status) {

@@ -10,42 +10,32 @@ import javax.validation.constraints.NotNull;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 public class Delivery {
 
-    @NotNull(groups = Default.class)
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Valid
     @ManyToOne
     @ConvertGroup(from = Default.class, to = ValidationGroups.ClientId.class)
     @JoinColumn(name= "client_id")
-    @NotNull
     private Client client;
 
-    @Valid
-    @NotNull
     @Embedded
     private Recipient recipient;
 
-    @NotNull
     private BigDecimal tax;
 
     @Enumerated(EnumType.STRING)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private StatusDelivery status;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime requestDate;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private OffsetDateTime completionDate;
 
     public Long getId() {
