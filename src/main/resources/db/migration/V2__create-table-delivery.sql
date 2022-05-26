@@ -17,4 +17,4 @@ create table delivery (
 );
 
 alter table delivery add constraint fk_delivery_client
-foreign key (client_id) references cliente (id);
+foreign key (client_id) references client (id);
