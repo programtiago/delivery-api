@@ -2,6 +2,7 @@ package com.tiagodeveloper.controller;
 
 import com.tiagodeveloper.domain.Delivery;
 import com.tiagodeveloper.domain.service.DeliverySolicitationService;
+import com.tiagodeveloper.domain.service.FinishedDeliveryService;
 import com.tiagodeveloper.mapper.DeliveryMapper;
 import com.tiagodeveloper.model.DeliveryModel;
 import com.tiagodeveloper.model.input.DeliveryInputModel;
@@ -24,6 +25,8 @@ public class DeliveryController{
 
     private DeliveryMapper deliveryMapper;
 
+    private FinishedDeliveryService finishedDeliveryService;
+
     public DeliveryController(DeliverySolicitationService solicitationService, DeliveryRepository deliveryRepository, DeliveryMapper deliveryMapper) {
         this.solicitationService = solicitationService;
         this.deliveryRepository = deliveryRepository;
@@ -37,6 +40,12 @@ public class DeliveryController{
         Delivery requestedDelivery = solicitationService.request(newDelivery);
 
         return deliveryMapper.toModel(requestedDelivery);
+    }
+
+    @PutMapping("/{deliveryId}/finishing")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void finish(@PathVariable Long deliveryId){
+        finishedDeliveryService.finish(deliveryId);
     }
 
     @GetMapping

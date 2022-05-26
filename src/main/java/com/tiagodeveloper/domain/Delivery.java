@@ -1,6 +1,7 @@
 package com.tiagodeveloper.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.tiagodeveloper.domain.exception.DomainException;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
@@ -115,5 +116,22 @@ public class Delivery {
         this.getOccurrences().add(occurrence);
 
         return occurrence;
+    }
+
+    public void finish() {
+        if (canBeComplete()){
+            throw new DomainException("Delivery cannot be complete");
+        }
+
+        setStatus(StatusDelivery.FINISHED);
+        setCompletionDate(OffsetDateTime.now());
+    }
+
+    public boolean canBeComplete(){
+        return StatusDelivery.PENDING.equals(getStatus());
+    }
+
+    public boolean cannotBeCompleted(){
+        return !canBeComplete();
     }
 }
