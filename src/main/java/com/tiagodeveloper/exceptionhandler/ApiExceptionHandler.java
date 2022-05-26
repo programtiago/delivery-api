@@ -1,6 +1,7 @@
 package com.tiagodeveloper.exceptionhandler;
 
 import com.tiagodeveloper.domain.exception.DomainException;
+import com.tiagodeveloper.domain.exception.EntityExceptionNotFound;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -50,6 +51,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<Object> handleDomain(DomainException ex, WebRequest request){
         HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        Error error = new Error();
+        error.setStatus(status.value());
+        error.setDateHour(OffsetDateTime.now());
+        error.setTitle(ex.getMessage());
+
+        return handleExceptionInternal(ex, error, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(EntityExceptionNotFound.class)
+    public ResponseEntity<Object> handleEntityNotFound(EntityExceptionNotFound ex, WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
 
         Error error = new Error();
         error.setStatus(status.value());

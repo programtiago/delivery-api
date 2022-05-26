@@ -32,7 +32,7 @@ public class Delivery {
 
     private BigDecimal tax;
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
     private List<Occurrence> occurrences;
 
     @Enumerated(EnumType.STRING)
