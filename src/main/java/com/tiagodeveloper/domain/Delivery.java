@@ -11,6 +11,7 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -30,6 +31,9 @@ public class Delivery {
     private Recipient recipient;
 
     private BigDecimal tax;
+
+    @OneToMany(mappedBy = "delivery")
+    private List<Occurrence> occurrences;
 
     @Enumerated(EnumType.STRING)
     private StatusDelivery status;
@@ -70,6 +74,14 @@ public class Delivery {
         this.tax = tax;
     }
 
+    public List<Occurrence> getOccurrences() {
+        return occurrences;
+    }
+
+    public void setOccurrences(List<Occurrence> occurrences) {
+        this.occurrences = occurrences;
+    }
+
     public StatusDelivery getStatus() {
         return status;
     }
@@ -92,5 +104,16 @@ public class Delivery {
 
     public void setCompletionDate(OffsetDateTime completionDate) {
         this.completionDate = completionDate;
+    }
+
+    public Occurrence addOccurence(String description) {
+        Occurrence occurrence = new Occurrence();
+        occurrence.setDescricao(description);
+        occurrence.setRegistryDate(OffsetDateTime.now());
+        occurrence.setDelivery(this);
+
+        this.getOccurrences().add(occurrence);
+
+        return occurrence;
     }
 }
