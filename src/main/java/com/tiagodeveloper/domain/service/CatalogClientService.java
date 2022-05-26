@@ -27,7 +27,7 @@ public class CatalogClientService {
                 .anyMatch(clientExistent -> !clientExistent.equals(client));
 
         if (emailExistent){
-            throw new DomainException("Já existe um cliente registado com este email.");
+            throw new DomainException("There is already a customer with this registered email.");
         }
         return clientRepository.save(client);
     }

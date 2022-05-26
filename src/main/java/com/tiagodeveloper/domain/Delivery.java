@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -11,18 +16,25 @@ import java.time.LocalDateTime;
 @Entity
 public class Delivery {
 
+    @NotNull(groups = Default.class)
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Valid
     @ManyToOne
+    @ConvertGroup(from = Default.class, to = ValidationGroups.ClientId.class)
     @JoinColumn(name= "client_id")
+    @NotNull
     private Client client;
 
+    @Valid
+    @NotNull
     @Embedded
     private Recipient recipient;
 
+    @NotNull
     private BigDecimal tax;
 
     @Enumerated(EnumType.STRING)
