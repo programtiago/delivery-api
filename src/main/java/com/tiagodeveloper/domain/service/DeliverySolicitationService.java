@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @Service
 public class DeliverySolicitationService {
@@ -28,7 +29,7 @@ public class DeliverySolicitationService {
 
         delivery.setClient(client);
         delivery.setStatus(StatusDelivery.PENDING);
-        delivery.setRequestDate(LocalDateTime.now());
+        delivery.setRequestDate(OffsetDateTime.now());
         return deliveryRepository.save(delivery);
     }
 }

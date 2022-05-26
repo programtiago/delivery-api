@@ -11,6 +11,7 @@ import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
@@ -42,10 +43,10 @@ public class Delivery {
     private StatusDelivery status;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime requestDate;
+    private OffsetDateTime requestDate;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDateTime completionDate;
+    private OffsetDateTime completionDate;
 
     public Long getId() {
         return id;
@@ -87,19 +88,19 @@ public class Delivery {
         this.status = status;
     }
 
-    public LocalDateTime getRequestDate() {
+    public OffsetDateTime getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(LocalDateTime requestDate) {
+    public void setRequestDate(OffsetDateTime requestDate) {
         this.requestDate = requestDate;
     }
 
-    public LocalDateTime getCompletionDate() {
+    public OffsetDateTime getCompletionDate() {
         return completionDate;
     }
 
-    public void setCompletionDate(LocalDateTime completionDate) {
+    public void setCompletionDate(OffsetDateTime completionDate) {
         this.completionDate = completionDate;
     }
 }
