@@ -1,5 +1,6 @@
 package com.tiagodeveloper.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
@@ -7,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Entity
 public class Delivery {
 
     @EqualsAndHashCode.Include
@@ -24,8 +26,13 @@ public class Delivery {
     private BigDecimal tax;
 
     @Enumerated(EnumType.STRING)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private StatusDelivery status;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime requestDate;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime completionDate;
 
     public Long getId() {

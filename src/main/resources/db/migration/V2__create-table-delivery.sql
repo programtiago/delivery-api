@@ -7,7 +7,7 @@ create table delivery (
     completion_date datetime,
 
     recipient_name varchar(60) not null,
-    recipient_address varchar(255) not null,
+    recipient_address varchar(255) default null,
     recipient_number varchar(30) not null,
     recipient_complement varchar(60) not null,
     recipient_district varchar(30) not null,

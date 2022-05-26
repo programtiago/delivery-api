@@ -15,6 +15,11 @@ public class CatalogClientService {
         this.clientRepository = clientRepository;
     }
 
+    public Client get(Long clientId){
+        return clientRepository.findById(clientId)
+                .orElseThrow(() -> new DomainException("Client not found"));
+    }
+
     @Transactional
     public Client save(Client client){
         boolean emailExistent = clientRepository.findByEmail(client.getEmail())

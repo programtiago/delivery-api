@@ -11,6 +11,10 @@ public class DeliveryController {
 
     private DeliverySolicitationService solicitationService;
 
+    public DeliveryController(DeliverySolicitationService solicitationService) {
+        this.solicitationService = solicitationService;
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Delivery request(@RequestBody Delivery delivery){
